@@ -1,0 +1,5 @@
+"reseau interne pour inter connecter les contenaires"
+docker network create eligibility-network
+
+"config db postgres {recommanded psql (PostgreSQL) 17.5 (Debian 17.5-1.pgdg110+1)"}
+docker run -d --name eligibility-db --network eligibility-network -e POSTGRES_BD=eligibility -e POSTGRES_USER=eligibility -e POSTGRES_PASSWORD=eligibility -p 5432:5432 -v eligibility_data:/var/lib/postgresql/data postgres:17
