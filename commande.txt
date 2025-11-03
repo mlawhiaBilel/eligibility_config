@@ -3,3 +3,11 @@ docker network create eligibility-network
 
 "config db postgres {recommanded psql (PostgreSQL) 17.5 (Debian 17.5-1.pgdg110+1)"}
 docker run -d --name eligibility-db --network eligibility-network -e POSTGRES_BD=eligibility -e POSTGRES_USER=eligibility -e POSTGRES_PASSWORD=eligibility -p 5432:5432 -v eligibility_data:/var/lib/postgresql/data postgres:17
+
+"create db for keycloak container"
+docker exec -it eligibility-db psql -U eligibility -d postgres -c "CREATE DATABASE keycloak OWNER eligibility;"
+
+"creation of keycloak container"
+docker run -d --name keycloak --network eligibility-network -e KEYCLOAK_ADMIN=eligibility -e KEYCLOAK_ADMIN_PASSWORD=eligibility -e KC_DB=postgres -e KC_DB_URL=jdbc:postgresql://eligibility-db:5432/keycloak -e KC_DB_USERNAME=eligibility -e KC_DB_PASSWORD=eligibility -p 8888:8080 -v keycloak_data:/opt/keycloak/data keycloak/keycloak:latest start-dev
+
+
