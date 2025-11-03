@@ -15,4 +15,23 @@ after doing: docker exec -it keycloak bash => after that excute ( newadmin pwd 1
 export ADMIN_PASS=123
 /opt/keycloak/bin/kc.sh bootstrap-admin user --username newadmin --password:env ADMIN_PASS
 
+(adding custom login page)
+/opt/keycloak/themes/eligibility/
+├── theme.properties
+└── login/
+    ├── login.ftl
+    ├── resources/
+    │   └── img/
+    │       └── mantu.png
+    └── messages/
+        ├── messages_en.properties
+        ├── messages_fr.properties
+        └── messages_ar.properties
+
+
+(theme.properties content)
+parent=keycloak
+import=common/keycloak
+styles=
+
 
