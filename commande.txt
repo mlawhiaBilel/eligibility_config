@@ -10,4 +10,9 @@ docker exec -it eligibility-db psql -U eligibility -d postgres -c "CREATE DATABA
 "creation of keycloak container"
 docker run -d --name keycloak --network eligibility-network -e KEYCLOAK_ADMIN=eligibility -e KEYCLOAK_ADMIN_PASSWORD=eligibility -e KC_DB=postgres -e KC_DB_URL=jdbc:postgresql://eligibility-db:5432/keycloak -e KC_DB_USERNAME=eligibility -e KC_DB_PASSWORD=eligibility -p 8888:8080 -v keycloak_data:/opt/keycloak/data keycloak/keycloak:latest start-dev
 
+"fixing temp admin removed"
+after doing: docker exec -it keycloak bash => after that excute ( newadmin pwd 123)
+export ADMIN_PASS=123
+/opt/keycloak/bin/kc.sh bootstrap-admin user --username newadmin --password:env ADMIN_PASS
+
 
