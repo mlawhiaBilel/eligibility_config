@@ -175,7 +175,7 @@
     <!-- Language Selector -->
     <div class="language-selector">
       <div class="dropdown">
-        <button class="btn lang-btn dropdown-toggle" id="loginLangDrop" data-bs-toggle="dropdown" aria-expanded="false">
+        <button class="btn lang-btn dropdown-toggle" id="loginLangDrop" data-bs-toggle="dropdown" aria-expanded="false" style="color: white; border: 1px solid white;">
           <img src="https://flagcdn.com/20x15/us.png" alt="EN" id="currentFlag" style="height:14px;margin-right:.5rem;">
           <span id="currentLang">EN</span>
         </button>
