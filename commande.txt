@@ -36,4 +36,5 @@ styles=
 
 ---------------------------------------------------------------------------------------------------
  
-
+(Adapter pour keycloack coté angular)
+npm i keycloak-angular@^16 keycloak-js@^25
