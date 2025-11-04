@@ -196,7 +196,7 @@
         <div class="logo-container">
           <img src="https://amaris.com/wp-content/themes/amaris/dist/images/amaris-logo-pink.svg" alt="Amaris" class="logo">
         </div>
-        <h1 id="pageTitle">Eligibility Tool</h1>
+        <h1 id="pageTitle">Eligibility Check Platform</h1>
       </div>
 
       <div class="login-body">
@@ -301,7 +301,7 @@
     // ===== Translations used for dynamic labels/placeholders =====
     const loginI18n = {
       en: {
-        title: "Eligibility Tool",
+        title: "Eligibility Check Platform",
         usernameLabel: (realm) => {
           // We keep Keycloak-provided label text where possible
           return document.getElementById('lblUsername').textContent || "Username or Email";
