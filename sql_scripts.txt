@@ -1,0 +1,31 @@
+-- ================================================
+-- Flyway Migration: Create assets table
+-- Database: PostgreSQL
+-- ================================================
+
+CREATE TABLE IF NOT EXISTS assets (
+    id BIGSERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    value64 TEXT NOT NULL, -- Base64-encoded string
+    company VARCHAR(255),
+    created_at TIMESTAMP WITHOUT TIME ZONE DEFAULT NOW() NOT NULL,
+    updated_at TIMESTAMP WITHOUT TIME ZONE DEFAULT NOW() NOT NULL,
+    type VARCHAR(50) NOT NULL CHECK (type IN ('logo', 'icon'))
+);
+
+-- ================================================
+-- Trigger: Automatically update 'updated_at' column
+-- ================================================
+
+CREATE OR REPLACE FUNCTION update_assets_timestamp()
+RETURNS TRIGGER AS $$
+BEGIN
+    NEW.updated_at = NOW();
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER trg_assets_updated_at
+BEFORE UPDATE ON assets
+FOR EACH ROW
+EXECUTE FUNCTION update_assets_timestamp();
