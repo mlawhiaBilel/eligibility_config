@@ -41,6 +41,6 @@ npm install @ngx-translate/core @ngx-translate/http-loader
 ---------------------------------------------------------------------------------------------------
 
 "adding Consul Discovery"
-docker run -d --name=consul-server --network eligibility-network -p 8500:8500 -p 8600:8600/udp -v data_consul:/bitnami/consul -e CONSUL_SERVER_REJOIN_AGE_MAX="0s" bitnami/consul
+docker run -d --name=consul-server --network eligibility-network -p 8500:8500 -p 8600:8600/udp -v data_consul:/bitnami/consul -e CONSUL_SERVER_REJOIN_AGE_MAX="0s" hashicorp/consul:1.22
 with restat auto option
 docker run -d --name=consul-server --network=eligibility-network -p 8500:8500 -p 8600:8600/udp -v data_consul:/consul/data -e CONSUL_BIND_INTERFACE=eth0 --restart unless-stopped hashicorp/consul:1.22
