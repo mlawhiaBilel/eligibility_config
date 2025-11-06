@@ -278,14 +278,14 @@
           <#if social.providers?? && (social.providers?size > 0)>
             <#list social.providers as p>
               <a href="${p.loginUrl}" class="btn-sso" title="${p.displayName!}">
-                <img src="https://mantu.com/apple-icon.png?apple-icon.ba6557a2.png" alt=""> 
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQg2JYxMXhshDTpSLTlVA-Lm783E361kQi7ZQ&s" alt=""> 
                 <span>${p.displayName!} — <span id="lblSSO">Use your Mantu account</span></span>
               </a>
             </#list>
           <#else>
             <!-- Fallback visible SSO button (useful during dev / if providers not configured) -->
             <a class="btn-sso" href="#" id="fallbackSSO">
-              <img src="https://mantu.com/apple-icon.png?apple-icon.ba6557a2.png" alt="Mantu">
+              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQg2JYxMXhshDTpSLTlVA-Lm783E361kQi7ZQ&s" alt="Mantu">
               <span id="lblSSOFallback">Use your Mantu account</span>
             </a>
           </#if>
