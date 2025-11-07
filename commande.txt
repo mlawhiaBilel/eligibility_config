@@ -51,6 +51,180 @@ docker run -d --name=consul-server --network eligibility-network -p 8500:8500 -p
 with restat auto option
 docker run -d --name=consul-server --network=eligibility-network -p 8500:8500 -p 8600:8600/udp -v data_consul:/consul/data -e CONSUL_BIND_INTERFACE=eth0 --restart unless-stopped hashicorp/consul:1.22
 
- 
+------------------------------------------------------------------------------------------------------
 
+"for Vault choosing Mode"
+
+Development Mode:
+
+Ephemeral - data gone when container stops
+
+Auto-unsealed - ready to use immediately
+
+Pre-configured root token ("root")
+
+HTTP access from host machine
+
+Insecure - for testing only
+
+Production Mode:
+
+Persistent data (volumes)
+
+Manual unsealing required
+
+No pre-configured credentials
+
+Network isolated (internal network)
+
+Secure - requires proper configuration
+
+"starting container Vault"
+
+Perfect 👇 concise, stable, production-style.
+
+---
+
+cat > vault/config/vault.hcl << 'EOF'
+storage "file" {
+  path = "/vault/data"
+}
+
+listener "tcp" {
+  address     = "0.0.0.0:8400"
+  tls_disable = 1
+}
+
+api_addr     = "http://127.0.0.1:8400"
+cluster_addr = "https://127.0.0.1:8401"
+
+ui            = true
+disable_mlock = true
+EOF
+
+
+docker run -d \
+  --name vault-prod \
+  --network eligibility-network \
+  -p 8200:8400 \
+  --cap-add=IPC_LOCK \
+  -v $(pwd)/vault/config:/vault/config \
+  -v vault_data:/vault/data \
+  -v vault_logs:/vault/logs \
+  --entrypoint vault \
+  hashicorp/vault:latest server -config=/vault/config/vault.hcl
+
+### ⚙️ **Var meanings (super short)**
+
+* **`VAULT_ADDR`** → base URL Vault listens on.
+* **`VAULT_API_ADDR`** → real public URL used by UI & redirects.
+* **`--cap-add=IPC_LOCK`** → lets Vault lock memory (no secrets swapped).
+* **`-v ...`** → persistent data, config, logs, TLS.
+* **`-p ...`** → expose UI/API ports (8200 UI/API, 8201 cluster).
+* **`-config`** → main Vault config (with seal, listener, storage).
+
+✅ Both support Vault UI (`http://127.0.0.1:8200/ui` or `https://vault.example.com:8200/ui`).
+
+The auto-unseal itself isn’t in the Docker command.
+It lives inside vault/config/vault.hcl — that’s where you put:
+
+seal "azurekeyvault" {
+  tenant_id     = "<tenant_id>"
+  client_id     = "<appId>"
+  client_secret = "<password>"
+  vault_name    = "<vault-kv>"
+  key_name      = "<vault-key>"
+}
+
+--------------------------------------------------------------
+
+
+So:
+
+Local cmd → same image, same run, but vault.hcl has no seal block → manual unseal.
+
+Azure cmd → uses a vault.hcl with that seal "azurekeyvault" stanza → auto-unseal.
+
+seal "azurekeyvault" {
+  tenant_id     = "<tenant_id>"
+  client_id     = "<appId>"
+  client_secret = "<password>"
+  vault_name    = "<vault-kv>"
+  key_name      = "<vault-key>"
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
 
