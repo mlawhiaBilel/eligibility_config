@@ -153,6 +153,9 @@ seal "azurekeyvault" {
   key_name      = "<vault-key>"
 }
 
+--------------------------------------------------------------------------
+to create vault token use this cmd after using docker exec -it vault-prod sh
+curl -s -H "X-Vault-Token: tokenValue" -X POST -d '{"policies":["usermanagementservice-policy"]}' http://127.0.0.1:8400/v1/auth/token/create
 
 
 
