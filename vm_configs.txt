@@ -1,0 +1,48 @@
+1. Installation de GNOME
+bash
+# Mettre à jour le système
+sudo apt update && sudo apt upgrade -y
+
+# Installer GNOME (version complète)
+sudo apt install task-gnome-desktop -y
+
+# Ou pour une version plus légère :
+# sudo apt install gnome-core -y
+2. Installation et configuration de RDP (xrdp)
+bash
+# Installer xrdp
+sudo apt install xrdp -y
+
+# Démarrer le service xrdp
+sudo systemctl enable xrdp
+sudo systemctl start xrdp
+
+# Vérifier que le service fonctionne
+sudo systemctl status xrdp
+
+Sélectionnez gdm3
+Utilisez les flèches pour sélectionner gdm3
+
+Appuyez sur Tab pour aller sur <Ok>
+
+Appuyez sur Entrée
+
+Pourquoi choisir gdm3 :
+Intégration optimale avec GNOME
+
+Plus stable pour l'environnement GNOME
+
+Meilleure gestion des sessions GNOME
+
+Support natif de Wayland
+
+Dans une NOUVELLE fenêtre SSH (ouvrez un nouveau terminal PowerShell) :
+
+powershell
+# Se connecter normalement sans tunnel
+ssh haithamcherif@20.8.89.188
+Puis sur la VM :
+
+bash
+# Vérifier que xrdp tourne
+sudo systemctl status xrdp
