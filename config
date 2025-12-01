@@ -1,0 +1,19 @@
+Host amaris-vm
+    HostName 20.8.89.188
+    User bilelmlaouhia
+    LocalForward 4200 localhost:4200
+    LocalForward 9000 localhost:9000
+    LocalForward 8888 localhost:8888
+    LocalForward 5432 localhost:5432
+    LocalForward 7000 localhost:7000
+    LocalForward 8200 localhost:8200
+    LocalForward 8500 localhost:8500
+    LocalForward 7001 localhost:7001
+    LocalForward 7003 localhost:7003
+    LocalForward 7004 localhost:7004
+    LocalForward 7005 localhost:7005
+    LocalForward 7006 localhost:7006
+    LocalForward 7007 localhost:7007
+    LocalForward 33389 localhost:3389
+
+  // file should have no extension and placed under c/users/username/.ssh dir
